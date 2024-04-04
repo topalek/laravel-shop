@@ -5,7 +5,7 @@
 
         <!-- Breadcrumbs -->
         <ul class="breadcrumbs flex flex-wrap gap-y-1 gap-x-4 mb-6">
-            <li><a class="text-body hover:text-pink text-xs" href="index.html">Главная</a></li>
+            <li><a class="text-body hover:text-pink text-xs" href="{{route('home')}}">Главная</a></li>
             <li><span class="text-body text-xs">Корзина покупок</span></li>
         </ul>
 
@@ -186,7 +186,7 @@
                     <a class="text-body hover:text-pink font-medium" href="#">Очистить корзину</a>
                 </div>
                 <div class="flex flex-col sm:flex-row lg:justify-end gap-4">
-                    <a class="btn btn-pink" href="catalog.html">За покупками</a>
+                    <a class="btn btn-pink" href="{{route('catalog')}}">За покупками</a>
                     <a class="btn btn-purple" href="checkout.html">Оформить заказ</a>
                 </div>
             </div>

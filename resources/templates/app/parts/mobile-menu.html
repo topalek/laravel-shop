@@ -2,7 +2,7 @@
     <div class="container">
         <div class="mmenu-heading flex items-center pt-6 xl:pt-12">
             <div class="shrink-0 grow">
-                <a href="index.html" rel="home">
+                <a href="{{route('home')}}" rel="home">
                     <img alt="CutCode" class="w-[148px] md:w-[201px] h-[36px] md:h-[50px]" src="./images/logo-dark.svg">
                 </a>
             </div>
@@ -39,11 +39,11 @@
                 </div>
             </div>
             <nav class="flex flex-col mt-8">
-                <a class="self-start py-1 text-dark hover:text-pink text-md font-bold" href="index.html">Главная</a>
-                <a class="self-start py-1 text-dark hover:text-pink text-md font-bold" href="catalog.html">Каталог
+                <a class="self-start py-1 text-dark hover:text-pink text-md font-bold" href="{{route('home')}}">Главная</a>
+                <a class="self-start py-1 text-dark hover:text-pink text-md font-bold" href="{{route('catalog')}}">Каталог
                     товаров</a>
                 <a class="self-start py-1 text-dark hover:text-pink text-md font-bold" href="orders.html">Мои заказы</a>
-                <a class="self-start py-1 text-dark hover:text-pink text-md font-bold" href="cart.html">Корзина</a>
+                <a class="self-start py-1 text-dark hover:text-pink text-md font-bold" href="{{route('cart')}}">Корзина</a>
             </nav>
             <div class="flex flex-wrap items-center space-x-6 mt-8">
                 <a class="inline-flex items-center text-darkblue hover:text-purple" href="#" rel="nofollow noopener"

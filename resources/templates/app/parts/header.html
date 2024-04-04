@@ -23,7 +23,7 @@
     <div class="container">
         <div class="header-inner flex items-center justify-between lg:justify-start">
             <div class="header-logo shrink-0">
-                <a href="index.html" rel="home">
+                <a href="{{route('home')}}" rel="home">
                     <img alt="CutCode"
                          class="w-[120px] xs:w-[148px] md:w-[201px] h-[30px] xs:h-[36px] md:h-[50px]" src="./images/logo.svg">
                 </a>
@@ -41,9 +41,9 @@
                     </button>
                 </form>
                 <nav class="hidden 2xl:flex gap-8">
-                    <a class="text-white hover:text-pink font-bold" href="index.html">Главная</a>
-                    <a class="text-white hover:text-pink font-bold" href="catalog.html">Каталог товаров</a>
-                    <a class="text-white hover:text-pink font-bold" href="cart.html">Корзина</a>
+                    <a class="text-white hover:text-pink font-bold" href="{{route('home')}}">Главная</a>
+                    <a class="text-white hover:text-pink font-bold" href="{{route('catalog')}}">Каталог товаров</a>
+                    <a class="text-white hover:text-pink font-bold" href="{{route('cart')}}">Корзина</a>
                 </nav>
             </div><!-- /.header-menu -->
             <div class="header-actions flex items-center gap-3 md:gap-5">
@@ -103,7 +103,7 @@
                         </div>
                     </div>
                 </div>
-                <a class="flex items-center gap-3 text-pink hover:text-white" href="cart.html">
+                <a class="flex items-center gap-3 text-pink hover:text-white" href="{{route('cart')}}">
                     <svg class="w-6 md:w-7 w-6 md:h-7" fill="currentColor" viewBox="0 0 52 52"
                          xmlns="http://www.w3.org/2000/svg">
                         <path
