@@ -17,7 +17,11 @@ class ProductFactory extends Factory
             'title'     => fake()->words(3, true),
             'price'     => fake()->numberBetween(1003, 10000),
             'brand_id'  => Brand::query()->inRandomOrder()->value('id'),
-            'thumbnail' => fake()->imageUrl(),
+            'thumbnail' => fake()->file(
+                base_path('tests/Fixtures/images/products'),
+                storage_path('app/public/images/products'),
+                false
+            ),
         ];
     }
 }

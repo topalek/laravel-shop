@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Casts\SlugCast;
+use App\Traits\Models\HasSlug;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -24,6 +26,7 @@ use Illuminate\Support\Carbon;
 class Product extends Model
 {
     use HasFactory;
+    use HasSlug;
 
     protected $fillable = [
         'slug',
@@ -33,14 +36,7 @@ class Product extends Model
         'thumbnail',
     ];
 
-    protected static function boot()
-    {
-        parent::boot();
 
-        static::creating(function (self $product) {
-            $product->slug = $product->slug ?? str($product->title)->slug();
-        });
-    }
 
     public function brand(): BelongsTo
     {
