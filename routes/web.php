@@ -13,3 +13,7 @@ Route::get('catalog', function () {
 Route::get('cart', function () {
     return view('welcome');
 })->name('cart');
+
+Route::get('login', function () {
+    return view('auth.login');
+})->name('login');
