@@ -3,14 +3,15 @@
 @section('title','Изменение пароля')
 
 @section('content')
-    <x-forms.auth-form title="Сменить пароль" action="" method="post">
+    <x-forms.auth-form title="Сменить пароль" action="{{route('password.update')}}" method="post">
         @csrf
+        <input type="hidden" name="token" value="{{$token}}">
         <x-forms.text-input
             name="email"
             type="email"
             required
             placeholder="E-mail"
-            value="{{old('email')}}"
+            value="{{old('email',request('email'))}}"
             :isError="$errors->has('email')"/>
         @error('email')
         <x-forms.error>{{$message}}</x-forms.error>

@@ -3,15 +3,13 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 
 class RegisterFormRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return auth()->guest();
     }
 
     /**
@@ -22,7 +20,16 @@ class RegisterFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name'     => ['required', 'string', 'max:255', 'min:1'],
+            'email'    => ['required', 'email:dns', 'unique:users,email'],
+            'password' => ['required', 'confirmed', Password::defaults()],
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'email' => str(request('email'))->squish()->lower()->value()
+        ]);
     }
 }

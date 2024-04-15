@@ -1,6 +1,7 @@
 <div class="product-card flex flex-col rounded-3xl bg-card">
     <a class="product-card-photo overflow-hidden h-[320px] rounded-3xl" href="product.html">
-        <img alt="SteelSeries Aerox 3 Snow" class="object-cover w-full h-full" src="./images/products/1.jpg">
+        <img alt="SteelSeries Aerox 3 Snow" class="object-cover w-full h-full"
+             src="{{asset("/images/products/$i.jpg")}}">
     </a>
     <div class="grow flex flex-col py-8 px-6">
         <h3 class="text-sm lg:text-md font-black">

@@ -99,7 +99,7 @@
             <div
                 class="products grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-8 gap-y-8 lg:gap-y-10 2xl:gap-y-12 mt-8">
                 @foreach(range(1,8) as $i)
-                    <x-product-card/>
+                    <x-product-card :i="$i"/>
                 @endforeach
             </div>
 

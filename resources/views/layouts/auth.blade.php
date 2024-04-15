@@ -14,6 +14,11 @@
                 <img alt="CutCode" class="w-[148px] md:w-[201px] h-[36px] md:h-[50px]" src="{{asset('images/logo.svg')}}">
             </a>
         </div>
+        @session('message')
+        <div class="p-4 bg-green-500 rounded-md">
+            {{ $value }}
+        </div>
+        @endsession
         @yield('content')
     </div>
 </main>
