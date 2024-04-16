@@ -1,14 +1,14 @@
 <div class="product-card flex flex-col rounded-3xl bg-card">
     <a class="product-card-photo overflow-hidden h-[320px] rounded-3xl" href="product.html">
         <img alt="SteelSeries Aerox 3 Snow" class="object-cover w-full h-full"
-             src="{{asset("/images/products/$i.jpg")}}">
+             src="{{asset('/storage/images/products/'.$product->thumbnail)}}">
     </a>
     <div class="grow flex flex-col py-8 px-6">
         <h3 class="text-sm lg:text-md font-black">
-            <a class="inline-block text-white hover:text-pink" href="product.html">SteelSeries Aerox 3 Snow</a>
+            <a class="inline-block text-white hover:text-pink" href="product.html">{{$product->title}}</a>
         </h3>
         <div class="mt-auto pt-6">
-            <div class="mb-3 text-sm font-semibold">30 000 ₽</div>
+            <div class="mb-3 text-sm font-semibold">{{$product->price}} ₽</div>
             <div class="flex flex-wrap items-center gap-4">
                 <a class="w-[56px] !h-[56px] !px-0 btn btn-pink" href="#">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">

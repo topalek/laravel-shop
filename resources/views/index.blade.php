@@ -10,7 +10,6 @@
 <x-header/>
 <main class="py-16 lg:py-20">
     <div class="container">
-
         <section>
             <!-- Section heading -->
             <h2 class="text-lg lg:text-[42px] font-black">Наши преимущества</h2>
@@ -61,7 +60,6 @@
                 </div>
             </div>
         </section>
-
         <section class="mt-16 lg:mt-24">
             <!-- Section heading -->
             <h2 class="text-lg lg:text-[42px] font-black">Категории</h2>
@@ -90,24 +88,18 @@
                    href="{{route('catalog')}}">Распродажа</a>
             </div>
         </section>
-
         <section class="mt-16 lg:mt-24">
-            <!-- Section heading -->
             <h2 class="text-lg lg:text-[42px] font-black">Каталог товаров</h2>
-
-            <!-- Products list -->
             <div
                 class="products grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-8 gap-y-8 lg:gap-y-10 2xl:gap-y-12 mt-8">
-                @foreach(range(1,8) as $i)
-                    <x-product-card :i="$i"/>
+                @foreach($products as $product)
+                    <x-product-card :product="$product"/>
                 @endforeach
             </div>
-
             <div class="mt-12 text-center">
                 <a class="btn btn-purple" href="{{route('catalog')}}">Все товары &nbsp;→</a>
             </div>
         </section>
-
         <section class="mt-20">
             <!-- Section heading -->
             <h2 class="text-lg lg:text-[42px] font-black">Бренды</h2>
@@ -152,7 +144,6 @@
                 </a>
             </div>
         </section>
-
     </div>
 </main>
 </body>
