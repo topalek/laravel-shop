@@ -106,42 +106,14 @@
 
             <!-- Brands list -->
             <div class="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-6 gap-4 md:gap-8 mt-12">
-                <a class="p-6 rounded-xl bg-card hover:bg-card/60" href="{{route('catalog')}}">
-                    <div class="h-12 md:h-16">
-                        <img alt="Steelseries" class="object-contain w-full h-full" src="../../images/brands/1.png">
-                    </div>
-                    <div class="mt-8 text-xs sm:text-sm lg:text-md font-semibold text-center">Steelseries</div>
-                </a>
-                <a class="p-6 rounded-xl bg-card hover:bg-card/60" href="{{route('catalog')}}">
-                    <div class="h-12 md:h-16">
-                        <img alt="Razer" class="object-contain w-full h-full" src="../../images/brands/2.png">
-                    </div>
-                    <div class="mt-8 text-xs sm:text-sm lg:text-md font-semibold text-center">Razer</div>
-                </a>
-                <a class="p-6 rounded-xl bg-card hover:bg-card/60" href="{{route('catalog')}}">
-                    <div class="h-12 md:h-16">
-                        <img alt="Logitech" class="object-contain w-full h-full" src="../../images/brands/3.png">
-                    </div>
-                    <div class="mt-8 text-xs sm:text-sm lg:text-md font-semibold text-center">Logitech</div>
-                </a>
-                <a class="p-6 rounded-xl bg-card hover:bg-card/60" href="{{route('catalog')}}">
-                    <div class="h-12 md:h-16">
-                        <img alt="HyperX" class="object-contain w-full h-full" src="../../images/brands/4.png">
-                    </div>
-                    <div class="mt-8 text-xs sm:text-sm lg:text-md font-semibold text-center">HyperX</div>
-                </a>
-                <a class="p-6 rounded-xl bg-card hover:bg-card/60" href="{{route('catalog')}}">
-                    <div class="h-12 md:h-16">
-                        <img alt="Playstation" class="object-contain w-full h-full" src="../../images/brands/5.png">
-                    </div>
-                    <div class="mt-8 text-xs sm:text-sm lg:text-md font-semibold text-center">Playstation</div>
-                </a>
-                <a class="p-6 rounded-xl bg-card hover:bg-card/60" href="{{route('catalog')}}">
-                    <div class="h-12 md:h-16">
-                        <img alt="XBOX" class="object-contain w-full h-full" src="../../images/brands/6.png">
-                    </div>
-                    <div class="mt-8 text-xs sm:text-sm lg:text-md font-semibold text-center">XBOX</div>
-                </a>
+                @foreach($brands as $brand)
+                    <a class="p-6 rounded-xl bg-card hover:bg-card/60" href="{{route('catalog')}}">
+                        <div class="h-12 md:h-16">
+                            <img alt="Steelseries" class="object-contain w-full h-full" src="{{$brand->thumbnail}}">
+                        </div>
+                        <div class="mt-8 text-xs sm:text-sm lg:text-md font-semibold text-center">{{$brand->title}}</div>
+                    </a>
+                @endforeach
             </div>
         </section>
     </div>

@@ -16,10 +16,16 @@ Route::get('cart', function () {
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('login', 'index')->name('index');
-    Route::post('login', 'login')->name('login');
+    Route::post('login', 'login')
+         ->middleware('throttle:auth')
+         ->name('login')
+    ;
     Route::delete('logout', 'logout')->name('logout');
     Route::get('register', 'signUp')->name('signUp');
-    Route::post('register', 'register')->name('register');
+    Route::post('register', 'register')
+         ->middleware('throttle:auth')
+         ->name('register')
+    ;
     Route::get('forgot-password', 'passwordResetRequest')->middleware('guest')->name('forgotPassword');
     Route::post('forgot-password', 'forgotPassword')->middleware('guest')->name('password.reset.email');
     Route::get('reset-password/{token}', 'resetPassword')->middleware('guest')->name('password.reset');

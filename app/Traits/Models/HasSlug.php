@@ -9,11 +9,11 @@ trait HasSlug
     protected static function bootHasSlug(): void
     {
         static::creating(function (Model $model) {
-            $this->makeSlug();
+            $model->makeSlug();
         });
     }
 
-    protected function makeSlug(): string
+    protected function makeSlug(): void
     {
         if (!$this->{$this->slugColumn()}) {
             $slug = $this->uniqueSlug(
