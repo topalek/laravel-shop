@@ -12,12 +12,12 @@ class AuthControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function it_store_success(): void
+    public function test_it_store_success(): void
     {
         \Event::fake();
         \Notification::fake();
 
-        $request = RegisterFormRequest::factory()->create();
+        $request = RegisterFormRequest::factory()->create(['password_confirmation' => 'password']);
 
         dd($request);
         $response = $this->post(
