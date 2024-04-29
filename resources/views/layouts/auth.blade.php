@@ -11,7 +11,7 @@
     <div class="container">
         <div class="text-center">
             <a class="inline-block" href="{{route('home')}}" rel="home">
-                <img alt="CutCode" class="w-[148px] md:w-[201px] h-[36px] md:h-[50px]" src="{{asset('images/logo.svg')}}">
+                <img alt="CutCode" class="w-[148px] md:w-[201px] h-[36px] md:h-[50px]" src="{{asset('/images/logo.svg')}}">
             </a>
         </div>
         @if($message = flash()->get())
