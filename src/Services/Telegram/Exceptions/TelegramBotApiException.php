@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Servises\Telegram\Exceptions;
+namespace Services\Telegram\Exceptions;
 
 
 use Illuminate\Http\Request;
