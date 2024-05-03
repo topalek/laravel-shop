@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Contracts\RouteRegistrar;
+use App\Routing\AppRoutes;
+use Domain\Auth\Routing\AuthRoutes;
 use http\Exception\RuntimeException;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Contracts\Routing\Registrar;
@@ -23,7 +25,8 @@ class RouteServiceProvider extends ServiceProvider
     public const HOME = '/';
 
     protected array $registrars = [
-        AppRegisstrar::class,
+        AppRoutes::class,
+        AuthRoutes::class,
     ];
 
     /**

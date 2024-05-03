@@ -44,7 +44,7 @@
         <x-slot:buttons>
             <div class="flex justify-between mt-5">
                 <div class="text-xxs md:text-xs">
-                    <a class="text-white hover:text-white/70 font-bold" href="{{route('forgotPassword')}}">Забыли
+                    <a class="text-white hover:text-white/70 font-bold" href="{{route('forgot.password')}}">Забыли
                         пароль?</a>
                 </div>
                 <div class="text-xxs md:text-xs">

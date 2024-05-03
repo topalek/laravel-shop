@@ -4,12 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginFormRequest;
-use Illuminate\Support\Facades\View;
-use Illuminate\View\Factory;
 
 class LoginController extends Controller
 {
-    public function page(): Factory|View
+    public function page()
     {
         return view('auth.login');
     }
@@ -25,5 +23,16 @@ class LoginController extends Controller
         $request->session()->regenerate();
 
         return redirect()->intended(route('home'));
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+
+        session()->invalidate();
+
+        session()->regenerateToken();
+
+        return redirect('/');
     }
 }
