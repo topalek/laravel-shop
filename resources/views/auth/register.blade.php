@@ -3,7 +3,7 @@
 @section('title','Регистрация')
 
 @section('content')
-    <x-forms.auth-form title="Регистрация" action="{{route('register')}}" method="post">
+    <x-forms.auth-form title="Регистрация" action="{{route('register.handle')}}" method="post">
         @csrf
         <x-forms.text-input
             name="name"
@@ -54,7 +54,7 @@
             <ul class="space-y-3 mt-4">
                 <li>
                     <a class="relative flex items-center h-14 px-12 rounded-lg border border-[#A07BF0] bg-white/20 hover:bg-white/20 active:bg-white/10 active:translate-y-0.5"
-                       href="{{route('github')}}">
+                       href="{{route('socialite.redirect',['driver' => 'github'])}}">
                         <svg class="shrink-0 absolute left-4 w-5 sm:w-6 h-5 sm:h-6" fill="currentColor"
                              viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path clip-rule="evenodd"
@@ -69,7 +69,7 @@
         <x-slot:buttons>
             <div class="flex justify-between mt-5">
                 <div class="text-xxs md:text-xs">
-                    <a class="text-white hover:text-white/70 font-bold" href="{{route('login')}}">Уже
+                    <a class="text-white hover:text-white/70 font-bold" href="{{route('login.page')}}">Уже
                         зарегистрированы</a>
                 </div>
             </div>

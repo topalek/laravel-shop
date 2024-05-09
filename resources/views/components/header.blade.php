@@ -29,7 +29,7 @@
             </div>
             <div class="header-actions flex items-center gap-3 md:gap-5">
                 @guest
-                    <a href="{{route('login')}}" class="profile hidden xs:flex items-center">
+                    <a href="{{route('login.page')}}" class="profile hidden xs:flex items-center">
                         <svg class="profile-icon w-8 h-8 text-purple" xmlns="http://www.w3.org/2000/svg"
                              aria-hidden="true" role="img" width="1em"
                              height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
