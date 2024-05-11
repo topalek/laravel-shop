@@ -46,8 +46,8 @@
                         <button @click="dropdownProfile = ! dropdownProfile"
                                 class="flex items-center text-white hover:text-pink transition">
                             <span class="sr-only">Профиль</span>
-                            <img alt="Данил Шуцкий" class="shrink-0 w-7 md:w-9 h-7 md:h-9 rounded-full"
-                                 src="./images/avatar.jpg">
+                            <img alt="{{auth()->user()->name}}" class="shrink-0 w-7 md:w-9 h-7 md:h-9 rounded-full"
+                                 src="{{auth()->user()->avatar}}">
                             <span class="hidden md:block ml-2 font-medium">{{auth()->user()->name ?? 'Guest'}}</span>
                             <svg class="shrink-0 w-3 h-3 ml-2" fill="currentColor" viewBox="0 0 30 16"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -69,7 +69,8 @@
                         >
                             <h5 class="text-body text-xs">Мой профиль</h5>
                             <div class="flex items-center mt-3">
-                                <img alt="Данил Шуцкий" class="w-11 h-11 rounded-full" src="./images/avatar.jpg">
+                                <img alt="{{auth()->user()->name}}" class="w-11 h-11 rounded-full"
+                                     src="{{auth()->user()->avatar}}">
                                 <span
                                     class="ml-3 text-xs md:text-sm font-bold">{{auth()->user()->name ?? 'Guest'}}</span>
                             </div>

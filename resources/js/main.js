@@ -5,26 +5,29 @@ document.addEventListener('DOMContentLoaded', function () {
      */
     const burgerMenu = document.querySelector('#burgerMenu');
     const mobileMenu = document.querySelector('#mobileMenu');
-    const mobileMenuNavLink = mobileMenu.querySelectorAll('nav > a');
-    const closeMobileMenu = document.querySelector('#closeMobileMenu');
+    if (mobileMenu) {
+        const mobileMenuNavLink = mobileMenu.querySelectorAll('nav > a');
+        const closeMobileMenu = document.querySelector('#closeMobileMenu');
 
-    function toggleMobileMenu() {
-        mobileMenu.classList.toggle('hidden');
-    }
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+        }
 
-    burgerMenu.addEventListener('click', function (event) {
-        toggleMobileMenu();
-    });
-
-    closeMobileMenu.addEventListener('click', function (event) {
-        toggleMobileMenu();
-    });
-
-    mobileMenuNavLink.forEach(function (el) {
-        el.addEventListener('click', function (event) {
+        burgerMenu.addEventListener('click', function (event) {
             toggleMobileMenu();
         });
-    });
+
+        closeMobileMenu.addEventListener('click', function (event) {
+            toggleMobileMenu();
+        });
+
+        mobileMenuNavLink.forEach(function (el) {
+            el.addEventListener('click', function (event) {
+                toggleMobileMenu();
+            });
+        });
+    }
+
 
     /**
      * Accordion

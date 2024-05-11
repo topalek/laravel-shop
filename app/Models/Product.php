@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Casts\SlugCast;
 use App\Traits\Models\HasSlug;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -34,6 +35,8 @@ class Product extends Model
         'price',
         'brand_id',
         'thumbnail',
+        'on_home_page',
+        'sorting',
     ];
 
 
@@ -46,5 +49,10 @@ class Product extends Model
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
+    }
+
+    public function scopeHomePage(Builder $query): Builder
+    {
+        return $query->where('on_home_page', true)->orderBy('sorting')->limit(6);
     }
 }

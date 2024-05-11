@@ -10,12 +10,14 @@
     @vite(['resources/css/app.css','resources/sass/main.sass', 'resources/js/app.js'])
 </head>
 <body class="antialiased">
-@if($message = flash()->get())
-    <div class="{{$message->class()}} p-5">
-        {{ $message->message() }}
+@include('shared.flash')
+<x-header/>
+<main class="py-16 lg:py-20">
+    <div class="container">
+        @yield('content')
     </div>
-@endif
-
-@yield('content')
+</main>
+<x-footer/>
+<script defer src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
 </body>
 </html>

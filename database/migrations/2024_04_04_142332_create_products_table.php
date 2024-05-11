@@ -23,6 +23,8 @@ return new class extends Migration {
                 ->cascadeOnUpdate()
                 ->nullOnDelete()
             ;
+            $table->boolean('on_home_page')->default(false);
+            $table->integer('sorting')->default(100);
             $table->timestamps();
         });
         Schema::create('category_product', function (Blueprint $table) {

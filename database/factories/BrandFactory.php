@@ -14,8 +14,10 @@ class BrandFactory extends Factory
     public function definition(): array
     {
         return [
-            'title'     => fake()->company(),
-            'thumbnail' => $this->faker->fixtureImage('brands', 'images/brands'),
+            'title'        => fake()->company(),
+            'thumbnail'    => $this->faker->fixtureImage('brands', 'images/brands'),
+            'on_home_page' => fake()->boolean(),
+            'sorting'      => fake()->numberBetween(1, 100),
         ];
     }
 }

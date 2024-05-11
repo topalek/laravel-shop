@@ -17,11 +17,7 @@
                 <img alt="CutCode" class="w-[148px] md:w-[201px] h-[36px] md:h-[50px]" src="{{asset('/images/logo.svg')}}">
             </a>
         </div>
-        @if($message = flash()->get())
-            <div class="{{$message->class()}} p-5">
-                {{ $message->message() }}
-            </div>
-        @endif
+        @include('shared.flash')
         @yield('content')
     </div>
 </main>
