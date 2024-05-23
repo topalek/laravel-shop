@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use App\Contracts\RouteRegistrar;
 use App\Routing\AppRoutes;
-use Domain\Auth\Routing\AuthRoutes;
+use App\Routing\AuthRoutes;
 use http\Exception\RuntimeException;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Contracts\Routing\Registrar;

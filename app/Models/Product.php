@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Casts\SlugCast;
 use App\Traits\Models\HasSlug;
+use App\Traits\Models\HasThumbnail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -28,6 +28,7 @@ class Product extends Model
 {
     use HasFactory;
     use HasSlug;
+    use HasThumbnail;
 
     protected $fillable = [
         'slug',
@@ -54,5 +55,10 @@ class Product extends Model
     public function scopeHomePage(Builder $query): Builder
     {
         return $query->where('on_home_page', true)->orderBy('sorting')->limit(6);
+    }
+
+    protected function thumbnailDir(): string
+    {
+        return 'products';
     }
 }
