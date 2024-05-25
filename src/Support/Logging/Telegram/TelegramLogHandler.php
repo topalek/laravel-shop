@@ -5,7 +5,7 @@ namespace Support\Logging\Telegram;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
 use Monolog\LogRecord;
-use Services\Telegram\TelegramBotApi;
+use Services\Telegram\TelegramBotApiContract;
 
 final class TelegramLogHandler extends AbstractProcessingHandler
 {
@@ -22,7 +22,7 @@ final class TelegramLogHandler extends AbstractProcessingHandler
 
     protected function write(LogRecord $record): void
     {
-        TelegramBotApi::sendMessage(
+        app(TelegramBotApiContract::class)::sendMessage(
             $this->token,
             $this->chatId,
             $record->formatted

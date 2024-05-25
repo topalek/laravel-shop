@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
-class AuthControllerTest extends TestCase
+class AuthControllerTestOld extends TestCase
 {
     use RefreshDatabase;
 

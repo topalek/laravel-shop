@@ -5,10 +5,10 @@ namespace App\Routing;
 
 use App\Contracts\RouteRegistrar;
 use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\GithubController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\SocialAuthController;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Facades\Route;
 
@@ -40,7 +40,7 @@ final class AuthRoutes implements RouteRegistrar
                     Route::post('reset-password', 'handle')->name('password.reset.handle');
                 });
 
-                Route::controller(GithubController::class)->group(function () {
+                Route::controller(SocialAuthController::class)->group(function () {
                     Route::get('/auth/socialite/{driver}', 'redirect')->name('socialite.redirect');
                     Route::get('/auth/socialite/{driver}/callback', 'callback')->name('socialite.callback');
                 });
