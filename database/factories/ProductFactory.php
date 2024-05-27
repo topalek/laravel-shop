@@ -15,7 +15,7 @@ class ProductFactory extends Factory
     {
         return [
             'title'        => fake()->words(3, true),
-            'price'        => fake()->numberBetween(1003, 10000),
+            'price' => fake()->numberBetween(10030, 100000),
             'brand_id'     => Brand::query()->inRandomOrder()->value('id'),
             'thumbnail'    => $this->faker->fixtureImage('products', 'images/products'),
             'on_home_page' => fake()->boolean(),

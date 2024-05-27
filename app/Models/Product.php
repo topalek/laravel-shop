@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\PriceCast;
 use Database\Factories\ProductFactory;
 use Domain\Catalog\Models\Brand;
 use Domain\Catalog\Models\Category;
@@ -43,6 +44,10 @@ class Product extends Model
         'sorting',
     ];
 
+    protected $casts = [
+        'on_home_page' => 'boolean',
+        'price'        => PriceCast::class
+    ];
 
 
     public function brand(): BelongsTo
