@@ -10,11 +10,33 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class BrandFactory extends Factory
 {
+    private $brands = [
+        'Apple',
+        'Microsoft',
+        'Samsung',
+        'Google',
+        'Sony',
+        'Intel',
+        'HP',
+        'Philips',
+        'Xiaomi',
+        'Panasonic',
+        'Canon',
+        'LG Electronics',
+        'Dell Technologies',
+        'Lenovo',
+        'Acer',
+        'ASUS',
+        'Toshiba',
+        'NVIDIA',
+        'Qualcomm',
+        'Huawei',
+    ];
 
     public function definition(): array
     {
         return [
-            'title'        => fake()->company(),
+            'title' => fake()->randomElement($this->brands),
             'thumbnail'    => $this->faker->fixtureImage('brands', 'images/brands'),
             'on_home_page' => fake()->boolean(),
             'sorting'      => fake()->numberBetween(1, 100),

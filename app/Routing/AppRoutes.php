@@ -23,7 +23,7 @@ final class AppRoutes implements RouteRegistrar
                  )
                       ->where('method', 'resize|crop|fit')
                       ->where('size', '\d+x\d+')
-                      ->where('file', '.+\.(png|jpg|jpeg|svg|gif|bmp)$')
+                     //                      ->where('file', '.+\.(png|jpg|jpeg|svg|gif|bmp)$')
                       ->name('thumbnail')
                  ;
 

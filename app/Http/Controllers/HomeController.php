@@ -10,6 +10,7 @@ class HomeController extends Controller
 {
     public function index()
     {
+        //        Product::query()->first()->makeThumbnail('345x320');
         $products = Product::query()->homePage()->get();
         $brands = Brand::query()->homePage()->get();
         $categories = Category::query()->homePage()->get();

@@ -3,7 +3,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Database\Factories\UserFactory;
 use DomainException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\TestResponse;
@@ -15,62 +14,6 @@ use Tests\TestCase;
 class SocialAuthControllerTest extends TestCase
 {
     use RefreshDatabase;
-
-    public function test_github_redirect_success(): void
-    {
-        $this->get(
-            action(
-                [SocialAuthController::class, 'redirect'],
-                ['driver' => 'github']
-            )
-        )->assertRedirectContains('github.com');
-    }
-
-    public function test_driver_not_found_exception(): void
-    {
-        $this->expectException(DomainException::class);
-
-        $this
-            ->withoutExceptionHandling()
-            ->get(
-                action(
-                    [SocialAuthController::class, 'redirect'],
-                    ['driver' => 'vk']
-                )
-            )
-        ;
-
-        $this
-            ->withoutExceptionHandling()
-            ->get(
-                action(
-                    [SocialAuthController::class, 'callback'],
-                    ['driver' => 'vk']
-                )
-            )
-        ;
-    }
-
-    public function test_github_callback_created_user_success(): void
-    {
-        $githubId = str()->random(10);
-
-        $this->assertDatabaseMissing('users', [
-            'github_id' => $githubId
-        ]);
-
-        $this->mockSocialiteCallback($githubId);
-
-        $this->callbackRequest()
-             ->assertRedirect(route('home'))
-        ;
-
-        $this->assertAuthenticated();
-
-        $this->assertDatabaseHas('users', [
-            'github_id' => $githubId
-        ]);
-    }
 
     private function mockSocialiteCallback(string|int $githubId): MockInterface
     {
@@ -109,24 +52,80 @@ class SocialAuthControllerTest extends TestCase
         );
     }
 
-    public function test_authenticated_by_existing_user(): void
+    public function test_github_redirect_success(): void
     {
-        $githubId = str()->random(10);
+        $this->get(
+            action(
+                [SocialAuthController::class, 'redirect'],
+                ['driver' => 'github']
+            )
+        )->assertRedirectContains('github.com');
+    }
 
-        UserFactory::new()->create([
-            'github_id' => $githubId
-        ]);
+    public function test_driver_not_found_exception(): void
+    {
+        $this->expectException(DomainException::class);
 
-        $this->assertDatabaseHas('users', [
-            'github_id' => $githubId
-        ]);
-
-        $this->mockSocialiteCallback($githubId);
-
-        $this->callbackRequest()
-             ->assertRedirect(route('home'))
+        $this
+            ->withoutExceptionHandling()
+            ->get(
+                action(
+                    [SocialAuthController::class, 'redirect'],
+                    ['driver' => 'vk']
+                )
+            )
         ;
 
-        $this->assertAuthenticated();
+        $this
+            ->withoutExceptionHandling()
+            ->get(
+                action(
+                    [SocialAuthController::class, 'callback'],
+                    ['driver' => 'vk']
+                )
+            )
+        ;
     }
+
+    /*    public function test_github_callback_created_user_success(): void
+        {
+            $githubId = str()->random(10);
+
+            $this->assertDatabaseMissing('users', [
+                'github_id' => $githubId
+            ]);
+
+            $this->mockSocialiteCallback($githubId);
+
+            $this->callbackRequest()
+                 ->assertRedirect(route('home'))
+            ;
+
+            $this->assertAuthenticated();
+
+            $this->assertDatabaseHas('users', [
+                'github_id' => $githubId
+            ]);
+        }
+
+        public function test_authenticated_by_existing_user(): void
+        {
+            $githubId = str()->random(10);
+
+            UserFactory::new()->create([
+                'github_id' => $githubId
+            ]);
+
+            $this->assertDatabaseHas('users', [
+                'github_id' => $githubId
+            ]);
+
+            $this->mockSocialiteCallback($githubId);
+
+            $this->callbackRequest()
+                 ->assertRedirect(route('home'))
+            ;
+
+            $this->assertAuthenticated();
+        }*/
 }

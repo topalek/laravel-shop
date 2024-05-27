@@ -2,7 +2,9 @@
 
 namespace Domain\Auth\Contracts;
 
+use Domain\Auth\DTOs\NewUser;
+
 interface RegisterNewUserContract
 {
-    public function __invoke(string $name, string $email, string $password);
+    public function __invoke(NewUser $dto);
 }
