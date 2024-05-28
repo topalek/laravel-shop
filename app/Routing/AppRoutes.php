@@ -6,6 +6,7 @@ namespace App\Routing;
 use App\Contracts\RouteRegistrar;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ThumbnailController;
+use Domain\Catalog\Models\Category;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,10 @@ final class AppRoutes implements RouteRegistrar
                  Route::get('catalog', function () {
                      return view('index');
                  })->name('catalog');
+
+                 Route::get('catalog/{category:slug}', function (Category $category) {
+                     return view('index');
+                 })->name('category');
 
                  Route::get('cart', function () {
                      return view('index');

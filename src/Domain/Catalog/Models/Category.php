@@ -4,6 +4,8 @@ namespace Domain\Catalog\Models;
 
 use App\Models\Product;
 use Database\Factories\CategoryFactory;
+use Domain\Catalog\Collections\CategoryCollection;
+use Domain\Catalog\QueryBuilders\CategoryQueryBuilder;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,11 +22,15 @@ use Support\Traits\Models\HasSlug;
  * @property Carbon                   $updated_at
  *
  * @property-read Collection<Product> $products
+ *
+ * @method static Category|CategoryQueryBuilder query()
+ *
  */
 class Category extends Model
 {
     use HasFactory;
     use HasSlug;
+
     protected $fillable = [
         'slug',
         'title',
@@ -37,9 +43,14 @@ class Category extends Model
         return $this->belongsToMany(Product::class);
     }
 
-    public function scopeHomePage(Builder $query): Builder
+    public function newCollection(array $models = [])
     {
-        return $query->where('on_home_page', true)->orderBy('sorting')->limit(10);
+        return new CategoryCollection($models);
+    }
+
+    public function newEloquentBuilder($query): Builder
+    {
+        return new CategoryQueryBuilder($query);
     }
 
     protected static function newFactory(): CategoryFactory

@@ -1,0 +1,13 @@
+<?php
+
+namespace Domain\Catalog\QueryBuilders;
+
+use Illuminate\Database\Eloquent\Builder;
+
+class BrandQueryBuilder extends Builder
+{
+    public function homePage(): Builder
+    {
+        return $this->where('on_home_page', true)->orderBy('sorting')->limit(6);
+    }
+}

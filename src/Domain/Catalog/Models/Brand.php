@@ -4,6 +4,8 @@ namespace Domain\Catalog\Models;
 
 use App\Models\Product;
 use Database\Factories\BrandFactory;
+use Domain\Catalog\Collections\BrandCollection;
+use Domain\Catalog\QueryBuilders\BrandQueryBuilder;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,7 +21,10 @@ use Support\Traits\Models\HasSlug;
  * @property string                   $thumbnail
  * @property Carbon                   $created_at
  * @property Carbon                   $updated_at
+ *
  * @property-read Collection<Product> $products
+ *
+ * @method static Builder|BrandQueryBuilder query()
  */
 class Brand extends Model
 {
@@ -39,9 +44,14 @@ class Brand extends Model
         return $this->hasMany(Product::class);
     }
 
-    public function scopeHomePage(Builder $query): Builder
+    public function newCollection(array $models = [])
     {
-        return $query->where('on_home_page', true)->orderBy('sorting')->limit(6);
+        return new BrandCollection($models);
+    }
+
+    public function newEloquentBuilder($query): Builder
+    {
+        return new BrandQueryBuilder($query);
     }
 
     protected static function newFactory(): BrandFactory
