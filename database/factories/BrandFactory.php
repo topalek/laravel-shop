@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class BrandFactory extends Factory
 {
-    protected $model = Brand::class;
-    private $brands = [
+    protected $model  = Brand::class;
+    private   $brands = [
         'Apple',
         'Microsoft',
         'Samsung',

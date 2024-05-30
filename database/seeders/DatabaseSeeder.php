@@ -16,11 +16,12 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // \App\Models\User::factory(10)->create();
-
+        $categories = Category::factory(7)->create();
         Brand::factory(20)->create();
-        Product::factory(20)
-               ->has(Category::factory(random_int(1, 3)))
-               ->create()
-        ;
+        Product::factory(20)->create()->each(function ($product) use ($categories) {
+            $product->categories()->attach(
+                $categories->random(random_int(1, 3))->pluck('id')->toArray()
+            );
+        });
     }
 }
