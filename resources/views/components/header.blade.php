@@ -23,7 +23,7 @@
                 </form>
                 <nav class="hidden 2xl:flex gap-8">
                     <a class="text-white hover:text-pink font-bold" href="{{route('home')}}">Главная</a>
-                    <a class="text-white hover:text-pink font-bold" href="{{route('catalog')}}">Каталог товаров</a>
+                    <a class="text-white hover:text-pink font-bold" href="{{route('shop')}}">Каталог товаров</a>
                     <a class="text-white hover:text-pink font-bold" href="{{route('cart')}}">Корзина</a>
                 </nav>
             </div>

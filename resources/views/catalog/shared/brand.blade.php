@@ -1,4 +1,4 @@
-<a class="p-6 rounded-xl bg-card hover:bg-card/60" href="{{route('catalog')}}">
+<a class="p-6 rounded-xl bg-card hover:bg-card/60" href="{{route('shop')}}">
     <div class="h-12 md:h-16">
         <img alt="Steelseries" class="object-contain w-full h-full" src="{{$brand->thumbnail}}">
     </div>

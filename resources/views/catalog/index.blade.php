@@ -8,7 +8,7 @@
             <!-- Breadcrumbs -->
             <ul class="breadcrumbs flex flex-wrap gap-y-1 gap-x-4 mb-6">
                 <li><a class="text-body hover:text-pink text-xs" href="{{route('home')}}">Главная</a></li>
-                <li><a class="text-body hover:text-pink text-xs" href="{{route('catalog')}}">Каталог</a></li>
+                <li><a class="text-body hover:text-pink text-xs" href="{{route('shop')}}">Каталог</a></li>
                 <li><span class="text-body text-xs">Мыши</span></li>
             </ul>
 
@@ -113,7 +113,7 @@
                             <div class="flex items-center gap-4">
                                 <div class="flex items-center gap-2">
                                     <a class="pointer-events-none inline-flex items-center justify-center w-10 h-10 rounded-md bg-card text-pink"
-                                       href="{{route('catalog')}}">
+                                       href="{{route('shop')}}">
                                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 52 52"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path clip-rule="evenodd"

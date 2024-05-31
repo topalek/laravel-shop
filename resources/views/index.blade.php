@@ -68,7 +68,7 @@
             @each('catalog.shared.product', $products, 'product')
         </div>
         <div class="mt-12 text-center">
-            <a class="btn btn-purple" href="{{route('catalog')}}">Все товары &nbsp;→</a>
+            <a class="btn btn-purple" href="{{route('shop')}}">Все товары &nbsp;→</a>
         </div>
     </section>
     <section class="mt-20">

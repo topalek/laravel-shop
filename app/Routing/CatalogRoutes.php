@@ -15,7 +15,7 @@ final class CatalogRoutes implements RouteRegistrar
     {
         Route::middleware('web')
              ->group(function () {
-                 Route::get('/catalog/{category:slug?}', CatalogController::class)->name('catalog');
+                 Route::get('catalog/{category:slug?}', CatalogController::class)->name('catalog');
              })
         ;
     }

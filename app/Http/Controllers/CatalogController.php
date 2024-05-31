@@ -8,7 +8,7 @@ use Domain\Catalog\Models\Category;
 
 class CatalogController extends Controller
 {
-    public function __invoke(?Category $category)
+    public function __invoke(?Category $category = null)
     {
         $brands = Brand::query()->has('products')->distinct()->get();
         $categories = Category::query()->has('products')->get();

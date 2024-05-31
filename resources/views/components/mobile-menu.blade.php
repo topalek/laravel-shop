@@ -61,7 +61,7 @@
             <nav class="flex flex-col mt-8">
                 <a class="self-start py-1 text-dark hover:text-pink text-md font-bold"
                    href="{{route('home')}}">Главная</a>
-                <a class="self-start py-1 text-dark hover:text-pink text-md font-bold" href="{{route('catalog')}}">Каталог
+                <a class="self-start py-1 text-dark hover:text-pink text-md font-bold" href="{{route('shop')}}">Каталог
                     товаров</a>
                 <a class="self-start py-1 text-dark hover:text-pink text-md font-bold" href="orders.html">Мои заказы</a>
                 <a class="self-start py-1 text-dark hover:text-pink text-md font-bold"
