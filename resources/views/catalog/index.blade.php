@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Каталог')
+@section('title', $category->title ?? 'Каталог')
 
 @section('content')
     <main class="py-16 lg:py-20">
@@ -8,8 +8,12 @@
             <!-- Breadcrumbs -->
             <ul class="breadcrumbs flex flex-wrap gap-y-1 gap-x-4 mb-6">
                 <li><a class="text-body hover:text-pink text-xs" href="{{route('home')}}">Главная</a></li>
-                <li><a class="text-body hover:text-pink text-xs" href="{{route('shop')}}">Каталог</a></li>
-                <li><span class="text-body text-xs">Мыши</span></li>
+                @if($category->exists)
+                    <li><a class="text-body hover:text-pink text-xs" href="{{route('shop')}}">Каталог</a></li>
+                    <li><span class="text-body text-xs">{{$category->title}}</span></li>
+                @else
+                    <li><span class="text-body text-xs">Каталог</span></li>
+                @endif
             </ul>
 
             <section>
@@ -31,6 +35,7 @@
                     <!-- Filters -->
                     <aside class="basis-2/5 xl:basis-1/4">
                         <form
+                            action="{{route('shop' ,$category)}}"
                             class="overflow-auto max-h-[320px] lg:max-h-[100%] space-y-10 p-6 2xl:p-8 rounded-2xl bg-card">
                             <!-- Filter item -->
                             <div>
@@ -42,11 +47,17 @@
                                 <div class="flex items-center gap-3">
                                     <input class="w-full h-12 px-4 rounded-lg border border-body/10 focus:border-pink focus:shadow-[0_0_0_3px_#EC4176] bg-white/5 text-white text-xs shadow-transparent outline-0 transition"
                                            placeholder="От"
-                                           type="number" value="9800">
+                                           type="number"
+                                           name="filters[price][from]"
+                                           value="{{request('filters.price.from',0)}}"
+                                    >
                                     <span class="text-body text-sm font-medium">–</span>
                                     <input class="w-full h-12 px-4 rounded-lg border border-body/10 focus:border-pink focus:shadow-[0_0_0_3px_#EC4176] bg-white/5 text-white text-xs shadow-transparent outline-0 transition"
                                            placeholder="До"
-                                           type="number" value="142800">
+                                           name="filters[price][to]"
+                                           value="{{request('filters.price.to',100000)}}"
+                                           type="number"
+                                    >
                                 </div>
                             </div>
                             <!-- Filter item -->
@@ -54,8 +65,13 @@
                                 <h5 class="mb-4 text-sm 2xl:text-md font-bold">Бренд</h5>
                                 @foreach($brands as $brand)
                                     <div class="form-checkbox">
-                                        <input id="filters-item-{{$brand->id}}" type="checkbox">
-                                        <label class="form-checkbox-label" for="filters-item-1">{{$brand->title}}</label>
+                                        <input id="filters-brand-{{$brand->id}}"
+                                               type="checkbox"
+                                               name="filters[brands][{{$brand->id}}]"
+                                               value="{{$brand->id}}"
+                                            @checked( request('filters.brands.'.$brand->id))
+                                        >
+                                        <label class="form-checkbox-label" for="filters-brand-{{$brand->id}}">{{$brand->title}}</label>
                                     </div>
                                 @endforeach
 
@@ -102,8 +118,14 @@
                                 </div>
                             </div>
                             <div>
-                                <button class="w-full !h-16 btn btn-outline" type="reset">Сбросить фильтры</button>
+                                <button class="w-full !h-16 btn btn-pink" type="submit">Поиск</button>
                             </div>
+                            @if(request('filters'))
+                                <div>
+                                    <button class="w-full !h-16 btn btn-outline" type="reset">Сбросить фильтры</button>
+                                </div>
+                            @endif
+
                         </form>
                     </aside>
 
@@ -113,7 +135,7 @@
                             <div class="flex items-center gap-4">
                                 <div class="flex items-center gap-2">
                                     <a class="pointer-events-none inline-flex items-center justify-center w-10 h-10 rounded-md bg-card text-pink"
-                                       href="{{route('shop')}}">
+                                       href="{{route('shop',$category)}}">
                                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 52 52"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path clip-rule="evenodd"
@@ -122,7 +144,7 @@
                                         </svg>
                                     </a>
                                     <a class="inline-flex items-center justify-center w-10 h-10 rounded-md bg-card text-white hover:text-pink"
-                                       href="catalog-list.html">
+                                       href="{{route('shop',$category)}}">
                                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 52 52"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path clip-rule="evenodd"
@@ -131,17 +153,21 @@
                                         </svg>
                                     </a>
                                 </div>
-                                <div class="text-body text-xxs sm:text-xs">Найдено: 25 товаров</div>
+                                <div class="text-body text-xxs sm:text-xs">Найдено: {{$products->total()}} товаров</div>
                             </div>
-                            <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+                            <div x-data="{}" class="flex flex-col sm:flex-row sm:items-center gap-3">
                                 <span class="text-body text-xxs sm:text-xs">Сортировать по</span>
-                                <form>
+                                <form
+                                    x-ref="sortForm"
+                                    action="{{route('shop' ,$category)}}">
                                     <select
+                                        name="sort"
+                                        x-on:change="$refs.sortForm.submit()"
                                         class="form-select w-full h-12 px-4 rounded-lg border border-body/10 focus:border-pink focus:shadow-[0_0_0_3px_#EC4176] bg-white/5 text-white text-xxs sm:text-xs shadow-transparent outline-0 transition">
-                                        <option class="text-dark" value="умолчанию">умолчанию</option>
-                                        <option class="text-dark" value="умолчанию">от дешевых к дорогим</option>
-                                        <option class="text-dark" value="умолчанию">от дорогих к дешевым</option>
-                                        <option class="text-dark" value="умолчанию">наименованию</option>
+                                        <option class="text-dark" value="">умолчанию</option>
+                                        <option class="text-dark" @selected(request('sort') === 'price') value="price">от дешевых к дорогим</option>
+                                        <option class="text-dark" @selected(request('sort') === '-price') value="-price">от дорогих к дешевым</option>
+                                        <option class="text-dark" @selected(request('sort') === 'title') value="title">названию</option>
                                     </select>
                                 </form>
                             </div>

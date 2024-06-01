@@ -60,6 +60,28 @@ class Product extends Model
         return $this->belongsToMany(Category::class);
     }
 
+    public function scopeFiltered(Builder $query): Builder
+    {
+        return $query->when(request('filters.brands'), function (Builder $query) {
+            $query->whereIn('brand_id', request('filters.brands'));
+        })->when(request('filters.price'), function (Builder $query) {
+            $query->whereBetween('price', [
+                request('filters.price.from', 0) * 100,
+                request('filters.price.to', 100000) * 100
+            ]);
+        });
+    }
+
+    public function scopeSorted(Builder $query): Builder
+    {
+        return match (request('sort')) {
+            'price'  => $query->orderBy('price'),
+            '-price' => $query->orderBy('price', 'desc'),
+            'title'  => $query->orderBy('title'),
+            default  => $query->orderBy('sorting'),
+        };
+    }
+
     public function scopeHomePage(Builder $query): Builder
     {
         return $query->where('on_home_page', true)->orderBy('sorting')->limit(6);
