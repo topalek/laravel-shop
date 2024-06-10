@@ -19,7 +19,7 @@ Route::get('/storage/images/{dir}/{method}/{size}/{file}', ThumbnailController::
      ->name('thumbnail')
 ;
 
-Route::get('shop/product/{product:slug}', [ProductController::class, 'show'])->name('product.show');
+Route::get('product/{product:slug?}', [ProductController::class, 'show'])->name('product');
 Route::get('shop/{category:slug?}', CatalogController::class)->name('shop');
 
 Route::get('cart', function () {
