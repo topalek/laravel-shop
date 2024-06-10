@@ -3,6 +3,7 @@
 namespace Domain\Catalog\ViewModels;
 
 
+use Cache;
 use Domain\Catalog\Models\Brand;
 use Support\Traits\Makeable;
 
@@ -12,6 +13,8 @@ class BrandViewModel
 
     public function homePage()
     {
-        return Brand::query()->homePage()->get();
+        return Cache::rememberForever('brand_home_page', function () {
+            return Brand::query()->homePage()->get();
+        });
     }
 }

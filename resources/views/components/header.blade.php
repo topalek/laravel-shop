@@ -9,11 +9,13 @@
                 </a>
             </div>
             <div class="header-menu grow hidden lg:flex items-center ml-8 mr-8 gap-8">
-                <form class="hidden lg:flex gap-3">
+                <form class="hidden lg:flex gap-3" action="{{route('shop')}}">
                     <input
+                        name="s"
+                        value="{{request('s')}}"
                         class="w-full h-12 px-4 rounded-lg border border-body/10 focus:border-pink focus:shadow-[0_0_0_3px_#EC4176] bg-white/5 text-white text-xs shadow-transparent outline-0 transition"
                         placeholder="Поиск..."
-                        required type="search">
+                        type="search">
                     <button class="shrink-0 w-12 !h-12 !px-0 btn btn-pink" type="submit">
                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -21,11 +23,7 @@
                         </svg>
                     </button>
                 </form>
-                <nav class="hidden 2xl:flex gap-8">
-                    <a class="text-white hover:text-pink font-bold" href="{{route('home')}}">Главная</a>
-                    <a class="text-white hover:text-pink font-bold" href="{{route('shop')}}">Каталог товаров</a>
-                    <a class="text-white hover:text-pink font-bold" href="{{route('cart')}}">Корзина</a>
-                </nav>
+                <x-menu/>
             </div>
             <div class="header-actions flex items-center gap-3 md:gap-5">
                 @guest

@@ -1,11 +1,11 @@
 <div class="product-card flex flex-col rounded-3xl bg-card">
-    <a class="product-card-photo overflow-hidden h-[320px] rounded-3xl" href="product.html">
+    <a class="product-card-photo overflow-hidden h-[320px] rounded-3xl" href="{{route('product.show',$product)}}">
         <img alt="SteelSeries Aerox 3 Snow" class="object-cover w-full h-full"
              src="{{ $product->makeThumbnail('345x320') }}">
     </a>
     <div class="grow flex flex-col py-8 px-6">
         <h3 class="text-sm lg:text-md font-black">
-            <a class="inline-block text-white hover:text-pink" href="product.html">{{$product->title}}</a>
+            <a class="inline-block text-white hover:text-pink" href="{{route('product.show',$product)}}">{{$product->title}}</a>
         </h3>
         <div class="mt-auto pt-6">
             <div class="flex justify-between">

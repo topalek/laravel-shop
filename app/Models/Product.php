@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Carbon;
 use Support\Traits\Models\HasSlug;
 use Support\Traits\Models\HasThumbnail;
@@ -20,8 +21,11 @@ use Support\Traits\Models\HasThumbnail;
  * @property int                       $id
  * @property string                    $slug
  * @property string                    $title
+ * @property string $text
  * @property string                    $thumbnail
  * @property int                       $price
+ * @property int    $sorting
+ * @property bool   $on_home_page
  * @property Carbon                    $created_at
  * @property Carbon                    $updated_at
  *
@@ -34,6 +38,8 @@ class Product extends Model
     use HasSlug;
     use HasThumbnail;
 
+    //    use Searchable;
+
     protected $fillable = [
         'slug',
         'title',
@@ -42,6 +48,7 @@ class Product extends Model
         'thumbnail',
         'on_home_page',
         'sorting',
+        'text',
     ];
 
     protected $casts = [
@@ -49,6 +56,14 @@ class Product extends Model
         'price'        => PriceCast::class
     ];
 
+    /* #[SearchUsingFullText(['title', 'text'])]
+     public function toSearchableArray(): array
+     {
+         return [
+             'title' => $this->title,
+             'text'  => $this->text,
+         ];
+     }*/
 
     public function brand(): BelongsTo
     {
@@ -60,16 +75,12 @@ class Product extends Model
         return $this->belongsToMany(Category::class);
     }
 
-    public function scopeFiltered(Builder $query): Builder
+    public function scopeFiltered(Builder $query)
     {
-        return $query->when(request('filters.brands'), function (Builder $query) {
-            $query->whereIn('brand_id', request('filters.brands'));
-        })->when(request('filters.price'), function (Builder $query) {
-            $query->whereBetween('price', [
-                request('filters.price.from', 0) * 100,
-                request('filters.price.to', 100000) * 100
-            ]);
-        });
+        return app(Pipeline::class)->send($query)
+                                   ->through(filters())
+                                   ->thenReturn()
+        ;
     }
 
     public function scopeSorted(Builder $query): Builder

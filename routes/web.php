@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\SocialAuthController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ThumbnailController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,7 @@ Route::get('/storage/images/{dir}/{method}/{size}/{file}', ThumbnailController::
      ->name('thumbnail')
 ;
 
+Route::get('shop/product/{product:slug}', [ProductController::class, 'show'])->name('product.show');
 Route::get('shop/{category:slug?}', CatalogController::class)->name('shop');
 
 Route::get('cart', function () {

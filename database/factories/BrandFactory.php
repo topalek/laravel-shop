@@ -38,7 +38,7 @@ class BrandFactory extends Factory
     {
         return [
             'title' => fake()->randomElement($this->brands),
-            'thumbnail'    => $this->faker->fixtureImage('brands', 'images/brands'),
+            'thumbnail' => $this->faker->fixtureImage('brands', 'brands'),
             'on_home_page' => fake()->boolean(),
             'sorting'      => fake()->numberBetween(1, 100),
         ];

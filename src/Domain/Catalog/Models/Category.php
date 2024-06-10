@@ -5,7 +5,9 @@ namespace Domain\Catalog\Models;
 use App\Models\Product;
 use Database\Factories\CategoryFactory;
 use Domain\Catalog\Collections\CategoryCollection;
+use Domain\Catalog\Observers\CategoryObserver;
 use Domain\Catalog\QueryBuilders\CategoryQueryBuilder;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -26,6 +28,7 @@ use Support\Traits\Models\HasSlug;
  * @method static Category|CategoryQueryBuilder query()
  *
  */
+#[ObservedBy(CategoryObserver::class)]
 class Category extends Model
 {
     use HasFactory;
