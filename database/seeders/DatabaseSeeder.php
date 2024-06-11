@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $categories = Category::factory(7)->create();
         $properties = Property::factory(10)->create();
-        Option::factory(3)->create();
+        Option::factory(2)->create();
         Brand::factory(20)->create();
         $optionValues = OptionValue::factory(10)->create();
         Product::factory(20)

@@ -80,26 +80,19 @@
                         <!-- Add to cart -->
                         <form class="space-y-8 mt-8">
                             <div class="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-4">
-                                <div class="flex flex-col gap-2">
-                                    <label class="cursor-pointer text-body text-xxs font-medium"
-                                           for="filter-item-1">Цвет</label>
-                                    <select class="form-select w-full h-12 px-4 rounded-lg border border-body/10 focus:border-pink focus:shadow-[0_0_0_3px_#EC4176] bg-white/5 text-white text-xs shadow-transparent outline-0 transition"
-                                            id="filter-item-1">
-                                        <option class="text-dark" value="Белый">Белый</option>
-                                        <option class="text-dark" value="Чёрный">Чёрный</option>
-                                        <option class="text-dark" value="Синий">Синий</option>
-                                    </select>
-                                </div>
-                                <div class="flex flex-col gap-2">
-                                    <label class="cursor-pointer text-body text-xxs font-medium" for="filter-item-2">Размер
-                                        (хват)</label>
-                                    <select class="form-select w-full h-12 px-4 rounded-lg border border-body/10 focus:border-pink focus:shadow-[0_0_0_3px_#EC4176] bg-white/5 text-white text-xs shadow-transparent outline-0 transition"
-                                            id="filter-item-2">
-                                        <option class="text-dark" value="Маленький">Маленький</option>
-                                        <option class="text-dark" value="Средний">Средний</option>
-                                        <option class="text-dark" value="Большой">Большой</option>
-                                    </select>
-                                </div>
+                                @foreach($options as $title => $values)
+                                    <div class="flex flex-col gap-2">
+                                        <label class="cursor-pointer text-body text-xxs font-medium"
+                                               for="filter-item-1">{{$title}}</label>
+                                        <select class="form-select w-full h-12 px-4 rounded-lg border border-body/10 focus:border-pink focus:shadow-[0_0_0_3px_#EC4176] bg-white/5 text-white text-xs shadow-transparent outline-0 transition"
+                                                id="filter-item-2">
+                                            @foreach($values as $value)
+                                                <option class="text-dark" value="{{$value->id}}">{{$value->title}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @endforeach
+
                             </div>
                             <div class="flex flex-wrap items-center gap-3 xs:gap-4">
                                 <div class="flex items-stretch h-[54px] lg:h-[72px] gap-2">
@@ -159,17 +152,17 @@
             </section>
 
             <!-- Watched products  -->
-            <section class="mt-16 xl:mt-24">
-                <h2 class="mb-12 text-lg lg:text-[42px] font-black">Просмотренные товары</h2>
-                <!-- Products list -->
-                <div
-                    class="products grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-x-8 gap-y-8 lg:gap-y-10 2xl:gap-y-12">
-                    @@include('parts/products/1.html')
-                    @@include('parts/products/2.html')
-                    @@include('parts/products/3.html')
-                    @@include('parts/products/4.html')
-                </div>
-            </section>
+            @if($viewed)
+                <section class="mt-16 xl:mt-24">
+                    <h2 class="mb-12 text-lg lg:text-[42px] font-black">Просмотренные товары</h2>
+                    <!-- Products list -->
+                    <div
+                        class="products grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-x-8 gap-y-8 lg:gap-y-10 2xl:gap-y-12">
+                        @each('catalog.shared.product', $viewed, 'product')
+                    </div>
+                </section>
+            @endif
+
 
         </div>
     </main>
