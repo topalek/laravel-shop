@@ -9,6 +9,7 @@ use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ThumbnailController;
+use App\Http\Middleware\CatalogViewMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -19,8 +20,8 @@ Route::get('/storage/images/{dir}/{method}/{size}/{file}', ThumbnailController::
      ->name('thumbnail')
 ;
 
-Route::get('product/{product:slug?}', [ProductController::class, 'show'])->name('product');
-Route::get('shop/{category:slug?}', CatalogController::class)->name('shop');
+Route::get('product/{product:slug}', [ProductController::class, 'show'])->name('product');
+Route::get('shop/{category:slug?}', CatalogController::class)->name('shop')->middleware(CatalogViewMiddleware::class);
 
 Route::get('cart', function () {
     return view('index');

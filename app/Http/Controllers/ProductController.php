@@ -9,7 +9,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $product->load(['optionValues.option']);
-        $viewed = Product::query()->with('brand')->whereIn('id', session('viewed', []))->limit(4)->get();
+        $viewed = Product::query()->with('brand')->whereIn('id', session('viewed', []))->where('id', '!=', $product->id)->limit(4)->get();
         $options = $product->optionValues->mapToGroups(function ($item) {
             return [$item->option->title => $item];
         });

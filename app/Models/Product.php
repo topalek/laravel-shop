@@ -93,24 +93,9 @@ class Product extends Model
         ;
     }
 
-    public function scopeSorted(Builder $query): Builder
+    public function scopeSorted(Builder $query)
     {
-        // моя реализация
-        /*return match (request('sort')) {
-            'price'  => $query->orderBy('price'),
-            '-price' => $query->orderBy('price', 'desc'),
-            'title'  => $query->orderBy('title'),
-            default  => $query->orderBy('sorting'),
-        };*/
-
-        return $query->when(request('sort'), function (Builder $q) {
-            $column = str(request('sort'));
-
-            if ($column->contains(['price', 'title'])) {
-                $direction = $column->contains('-') ? 'desc' : 'asc';
-                $q->orderBy((string)$column->remove('-'), $direction);
-            }
-        });
+        sorter()->run($query);
     }
 
     public function scopeHomePage(Builder $query): Builder
