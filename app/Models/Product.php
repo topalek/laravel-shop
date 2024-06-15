@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Casts\PriceCast;
 use Database\Factories\ProductFactory;
+use Domain\Catalog\Facades\Sorter;
 use Domain\Catalog\Models\Brand;
 use Domain\Catalog\Models\Category;
 use Illuminate\Database\Eloquent\Builder;
@@ -95,7 +96,7 @@ class Product extends Model
 
     public function scopeSorted(Builder $query)
     {
-        sorter()->run($query);
+        Sorter::run($query);
     }
 
     public function scopeHomePage(Builder $query): Builder
