@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Models;
+namespace Domain\Product\Models;
 
 use App\Casts\PriceCast;
+use App\Jobs\ProductJsonProperties;
 use Database\Factories\ProductFactory;
-use Domain\Catalog\Facades\Sorter;
 use Domain\Catalog\Models\Brand;
 use Domain\Catalog\Models\Category;
-use Illuminate\Database\Eloquent\Builder;
+use Domain\Product\QueryBuilders\ProductQueryBuilder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Carbon;
 use Support\Traits\Models\HasSlug;
 use Support\Traits\Models\HasThumbnail;
@@ -23,6 +22,7 @@ use Support\Traits\Models\HasThumbnail;
  * @property string                    $slug
  * @property string                    $title
  * @property string $text
+ * @property string $json_properties
  * @property string                    $thumbnail
  * @property int                       $price
  * @property int    $sorting
@@ -50,11 +50,13 @@ class Product extends Model
         'on_home_page',
         'sorting',
         'text',
+        'json_properties'
     ];
 
     protected $casts = [
-        'on_home_page' => 'boolean',
-        'price'        => PriceCast::class
+        'on_home_page'    => 'boolean',
+        'price'           => PriceCast::class,
+        'json_properties' => 'array',
     ];
 
     /* #[SearchUsingFullText(['title', 'text'])]
@@ -86,24 +88,6 @@ class Product extends Model
         return $this->belongsToMany(OptionValue::class);
     }
 
-    public function scopeFiltered(Builder $query)
-    {
-        return app(Pipeline::class)->send($query)
-                                   ->through(filters())
-                                   ->thenReturn()
-        ;
-    }
-
-    public function scopeSorted(Builder $query)
-    {
-        Sorter::run($query);
-    }
-
-    public function scopeHomePage(Builder $query): Builder
-    {
-        return $query->where('on_home_page', true)->orderBy('sorting')->limit(6);
-    }
-
     protected function thumbnailDir(): string
     {
         return 'products';
@@ -112,5 +96,18 @@ class Product extends Model
     protected static function newFactory(): ProductFactory
     {
         return ProductFactory::new();
+    }
+
+    public function newEloquentBuilder($query): ProductQueryBuilder
+    {
+        return new ProductQueryBuilder($query);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::created(function (Product $product) {
+            ProductJsonProperties::dispatch($product)->delay(now()->addSeconds(10));
+        });
     }
 }

@@ -1,4 +1,4 @@
-@php use App\Models\Product; @endphp
+@php use Domain\Product\Models\Product; @endphp
 @extends('layouts.app')
 @section('title', $product->title ?? 'Каталог')
 <?php
@@ -71,9 +71,9 @@
                             <div class="text-body text-md md:text-lg font-bold line-through">59 300 ₽</div>
                         </div>
                         <ul class="sm:max-w-[360px] space-y-2 mt-8">
-                            @foreach($product->properties as $property)
+                            @foreach($product->json_properties as $prop => $value)
                                 <li class="flex justify-between text-body">
-                                    <strong class="text-white">{{$property->title}}:</strong> {{$property->pivot->value}}</li>
+                                    <strong class="text-white">{{$prop}}:</strong> {{$value}}</li>
                             @endforeach
                         </ul>
 

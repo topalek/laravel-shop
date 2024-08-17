@@ -11,7 +11,7 @@ class Sorter
 
     public function __construct(protected array $columns = []) {}
 
-    public function run(Builder $query): Builder
+    public function run(Builder $query)
     {
         $sortData = $this->sortData();
         $query->when($sortData->contains($this->columns()), function (Builder $q) use ($sortData) {

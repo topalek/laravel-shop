@@ -10,8 +10,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class CategoryFactory extends Factory
 {
-    protected $model      = Category::class;
-    private   $categories = [
+    protected $model = Category::class;
+
+    private $categories = [
         'Смартфоны и аксессуары',
         'Ноутбуки и ультрабуки',
         'Планшеты',
