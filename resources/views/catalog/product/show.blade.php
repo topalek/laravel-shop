@@ -70,13 +70,14 @@
                             <div class="text-pink text-lg md:text-xl font-black">{{$product->price}}</div>
                             <div class="text-body text-md md:text-lg font-bold line-through">59 300 ₽</div>
                         </div>
-                        <ul class="sm:max-w-[360px] space-y-2 mt-8">
-                            @foreach($product->json_properties as $prop => $value)
-                                <li class="flex justify-between text-body">
-                                    <strong class="text-white">{{$prop}}:</strong> {{$value}}</li>
-                            @endforeach
-                        </ul>
-
+                        @if($product->json_properties)
+                            <ul class="sm:max-w-[360px] space-y-2 mt-8">
+                                @foreach($product->json_properties as $prop => $value)
+                                    <li class="flex justify-between text-body">
+                                        <strong class="text-white">{{$prop}}:</strong> {{$value}}</li>
+                                @endforeach
+                            </ul>
+                        @endif
                         <!-- Add to cart -->
                         <form class="space-y-8 mt-8">
                             <div class="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-4">

@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class BrandFilter extends AbstractFilter
 {
-
     public function title(): string
     {
         return "Бренд";

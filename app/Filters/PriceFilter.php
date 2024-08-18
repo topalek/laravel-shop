@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class PriceFilter extends AbstractFilter
 {
-
     public function title(): string
     {
         return "Цена";

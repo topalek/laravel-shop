@@ -7,6 +7,11 @@ use Stringable;
 
 abstract class AbstractFilter implements Stringable
 {
+    public function __invoke(Builder $query, $next)
+    {
+        return $next($this->apply($query));
+    }
+
     abstract public function title(): string;
 
     abstract public function values(): array;
@@ -42,12 +47,6 @@ abstract class AbstractFilter implements Stringable
     }
 
     abstract public function view(): string;
-
-    public function __invoke(Builder $query, $next): void
-    {
-        $this->apply($query);
-        $next($query);
-    }
 
     abstract public function apply(Builder $query): Builder;
 

@@ -3,6 +3,7 @@
 namespace Domain\Product\QueryBuilders;
 
 use Domain\Catalog\Facades\Sorter;
+use Domain\Catalog\Models\Category;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pipeline\Pipeline;
 
@@ -25,5 +26,19 @@ class ProductQueryBuilder extends Builder
     public function sorted(): Builder|ProductQueryBuilder
     {
         return Sorter::run($this);
+    }
+
+    public function withCategory(Category $category): ProductQueryBuilder
+    {
+        return $this->when($category->exists, function (Builder $q) use ($category) {
+            $q->whereRelation('categories', 'categories.id', '=', $category->id);
+        });
+    }
+
+    public function search(): ProductQueryBuilder
+    {
+        return $this->when(request('s'), function (Builder $q) {
+            $q->whereFullText(['title', 'text'], request('s'));
+        });
     }
 }

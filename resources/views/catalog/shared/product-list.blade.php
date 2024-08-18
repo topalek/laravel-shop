@@ -7,11 +7,13 @@
         <h3 class="text-sm lg:text-md font-black">
             <a class="inline-block text-white hover:text-pink" href="{{route('product',$product)}}">{{$product->title}}</a>
         </h3>
-        <ul class="space-y-1 mt-4 text-xxs">
-            @foreach($product->json_properties as $prop => $value)
-                <li class="flex justify-between text-body"><strong>{{$prop}}:</strong> {{$value}}</li>
-            @endforeach
-        </ul>
+        @if($product->json_properties)
+            <ul class="space-y-1 mt-4 text-xxs">
+                @foreach($product->json_properties as $prop => $value)
+                    <li class="flex justify-between text-body"><strong>{{$prop}}:</strong> {{$value}}</li>
+                @endforeach
+            </ul>
+        @endif
         <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-6 mt-6">
             <div class="flex items-baseline gap-4">
                 <div class="text-pink text-md xl:text-lg font-black">{{$product->price}}</div>

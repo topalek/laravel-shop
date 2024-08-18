@@ -4,6 +4,7 @@ namespace Domain\Catalog\Models;
 
 use Database\Factories\BrandFactory;
 use Domain\Catalog\Collections\BrandCollection;
+use Domain\Catalog\Collections\OptionValueCollection;
 use Domain\Catalog\QueryBuilders\BrandQueryBuilder;
 use Domain\Product\Models\Product;
 use Illuminate\Database\Eloquent\Builder;
@@ -24,7 +25,7 @@ use Support\Traits\Models\HasSlug;
  *
  * @property-read Collection<Product> $products
  *
- * @method static Builder|BrandQueryBuilder query()
+ * @method static Brand|BrandQueryBuilder query()
  */
 class Brand extends Model
 {
@@ -44,7 +45,7 @@ class Brand extends Model
         return $this->hasMany(Product::class);
     }
 
-    public function newCollection(array $models = [])
+    public function newCollection(array $models = []): BrandCollection
     {
         return new BrandCollection($models);
     }

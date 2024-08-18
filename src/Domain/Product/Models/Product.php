@@ -32,6 +32,8 @@ use Support\Traits\Models\HasThumbnail;
  *
  * @property-read Collection<Category> $categories
  * @property-read Brand                $brand
+ *
+ * @method static Product|ProductQueryBuilder query()
  */
 class Product extends Model
 {

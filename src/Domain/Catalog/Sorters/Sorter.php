@@ -14,7 +14,7 @@ class Sorter
     public function run(Builder $query)
     {
         $sortData = $this->sortData();
-        $query->when($sortData->contains($this->columns()), function (Builder $q) use ($sortData) {
+        return $query->when($sortData->contains($this->columns()), function (Builder $q) use ($sortData) {
             $q->orderBy(
                 (string)$sortData->remove('-'),
                 $sortData->contains('-') ? 'desc' : 'asc'
